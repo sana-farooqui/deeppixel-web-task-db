@@ -5,8 +5,8 @@ import json
 PORT = 8080
 DEBUG = True
 POSTGRES_CONFIG = {
-    'user': 'postgres',
-    'pw': 'sourpatchkids2001',
+    'user': 'username',
+    'pw': 'password',
     'db': 'postgres',
     'host': '127.0.0.1',
     'port': '5432'}
