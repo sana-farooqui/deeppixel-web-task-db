@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, abort
 from flask_sqlalchemy import SQLAlchemy
 import json
 
@@ -34,6 +34,20 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db.create_all()
 
 
+@app.errorhandler(500)
+def connection_error(error):
+    return 'Error: Database connection failed'
+
+# CHECK DATABASE CONNECTION
+@app.before_request
+def check_db():
+    try:
+        db.session.query("1")
+    except:
+        abort(500)
+
+
+# VIEW FUNCTIONS
 @app.route('/write', methods=['POST'])
 def write():
     post = request.get_json()
